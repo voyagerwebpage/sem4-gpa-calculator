@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>CGPA Calculator</h1>
+        <form id="cgpa-form">
+            <div class="input-group">
+                <label for="ds">Data Structures (DS):</label>
+                <input type="number" id="ds" min="0" max="10" step="0.1" required>
+            </div>
+            <div class="input-group">
+                <label for="oops">Object Oriented Programming (OOPS):</label>
+                <input type="number" id="oops" min="0" max="10" step="0.1" required>
+            </div>
+            <div class="input-group">
+                <label for="coa">Computer Organization & Architecture (COA):</label>
+                <input type="number" id="coa" min="0" max="10" step="0.1" required>
+            </div>
+            <div class="input-group">
+                <label for="dsd">Digital System Design (DSD):</label>
+                <input type="number" id="dsd" min="0" max="10" step="0.1" required>
+            </div>
+            <div class="input-group">
+                <label for="math">Mathematics (MATH):</label>
+                <input type="number" id="math" min="0" max="10" step="0.1" required>
+            </div>
+            <div class="input-group">
+                <label for="ds-lab">Data Structures Lab (DS Lab):</label>
+                <input type="number" id="ds-lab" min="0" max="10" step="0.1" required>
+            </div>
+            <div class="input-group">
+                <label for="oops-lab">OOPS Lab:</label>
+                <input type="number" id="oops-lab" min="0" max="10" step="0.1" required>
+            </div>
+            <div class="input-group">
+                <label for="dsd-lab">DSD Lab:</label>
+                <input type="number" id="dsd-lab" min="0" max="10" step="0.1" required>
+            </div>
+            <button type="button" id="calculate-btn">Calculate</button>
+        </form>
+        <div id="result">
+            <h2>Results</h2>
+            <p id="total-credits">Total Credits: </p>
+            <p id="gpa">GPA: </p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('calculate-btn').addEventListener('click', function() {
+            const ds = parseFloat(document.getElementById('ds').value) || 0;
+            const oops = parseFloat(document.getElementById('oops').value) || 0;
+            const coa = parseFloat(document.getElementById('coa').value) || 0;
+            const dsd = parseFloat(document.getElementById('dsd').value) || 0;
+            const math = parseFloat(document.getElementById('math').value) || 0;
+            const dsLab = parseFloat(document.getElementById('ds-lab').value) || 0;
+            const oopsLab = parseFloat(document.getElementById('oops-lab').value) || 0;
+            const dsdLab = parseFloat(document.getElementById('dsd-lab').value) || 0;
+
+            const totalCredits = (ds * 4) + (oops * 4) + (coa * 4) + (dsd * 4) + (math * 3) + dsLab + oopsLab + dsdLab;
+            const gpa = totalCredits / 22;
+
+            document.getElementById('total-credits').textContent = `Total Credits: ${totalCredits.toFixed(2)}`;
+            document.getElementById('gpa').textContent = `GPA: ${gpa.toFixed(2)}`;
+        });
+    </script>
+</body>
+</html>

@@ -11,36 +11,36 @@
         <h1>CGPA Calculator</h1>
         <form id="cgpa-form">
             <div class="input-group">
-                <label for="ds">Data Structures (DS):</label>
-                <input type="number" id="ds" min="0" max="10" step="0.1" required>
+                <label>Data Structures (DS):</label>
+                <div class="radio-group" id="ds"></div>
             </div>
             <div class="input-group">
-                <label for="oops">Object Oriented Programming (OOPS):</label>
-                <input type="number" id="oops" min="0" max="10" step="0.1" required>
+                <label>Object Oriented Programming (OOPS):</label>
+                <div class="radio-group" id="oops"></div>
             </div>
             <div class="input-group">
-                <label for="coa">Computer Organization & Architecture (COA):</label>
-                <input type="number" id="coa" min="0" max="10" step="0.1" required>
+                <label>Computer Organization & Architecture (COA):</label>
+                <div class="radio-group" id="coa"></div>
             </div>
             <div class="input-group">
-                <label for="dsd">Digital System Design (DSD):</label>
-                <input type="number" id="dsd" min="0" max="10" step="0.1" required>
+                <label>Digital System Design (DSD):</label>
+                <div class="radio-group" id="dsd"></div>
             </div>
             <div class="input-group">
-                <label for="math">Mathematics (MATH):</label>
-                <input type="number" id="math" min="0" max="10" step="0.1" required>
+                <label>Mathematics (MATH):</label>
+                <div class="radio-group" id="math"></div>
             </div>
             <div class="input-group">
-                <label for="ds-lab">Data Structures Lab (DS Lab):</label>
-                <input type="number" id="ds-lab" min="0" max="10" step="0.1" required>
+                <label>Data Structures Lab (DS Lab):</label>
+                <div class="radio-group" id="ds-lab"></div>
             </div>
             <div class="input-group">
-                <label for="oops-lab">OOPS Lab:</label>
-                <input type="number" id="oops-lab" min="0" max="10" step="0.1" required>
+                <label>OOPS Lab:</label>
+                <div class="radio-group" id="oops-lab"></div>
             </div>
             <div class="input-group">
-                <label for="dsd-lab">DSD Lab:</label>
-                <input type="number" id="dsd-lab" min="0" max="10" step="0.1" required>
+                <label>DSD Lab:</label>
+                <div class="radio-group" id="dsd-lab"></div>
             </div>
             <button type="button" id="calculate-btn">Calculate</button>
         </form>
@@ -52,17 +52,53 @@
     </div>
 
     <script>
-        document.getElementById('calculate-btn').addEventListener('click', function() {
-            const ds = parseFloat(document.getElementById('ds').value) || 0;
-            const oops = parseFloat(document.getElementById('oops').value) || 0;
-            const coa = parseFloat(document.getElementById('coa').value) || 0;
-            const dsd = parseFloat(document.getElementById('dsd').value) || 0;
-            const math = parseFloat(document.getElementById('math').value) || 0;
-            const dsLab = parseFloat(document.getElementById('ds-lab').value) || 0;
-            const oopsLab = parseFloat(document.getElementById('oops-lab').value) || 0;
-            const dsdLab = parseFloat(document.getElementById('dsd-lab').value) || 0;
+        const grades = {
+            'A+': 10,
+            'A': 9,
+            'B': 8,
+            'C': 7,
+            'D': 6,
+            'E': 5,
+            'F': 0
+        };
 
-            const totalCredits = (ds * 4) + (oops * 4) + (coa * 4) + (dsd * 4) + (math * 3) + dsLab + oopsLab + dsdLab;
+        const fields = ['ds', 'oops', 'coa', 'dsd', 'math', 'ds-lab', 'oops-lab', 'dsd-lab'];
+        const weights = {
+            'ds': 4,
+            'oops': 4,
+            'coa': 4,
+            'dsd': 4,
+            'math': 3,
+            'ds-lab': 1,
+            'oops-lab': 1,
+            'dsd-lab': 1
+        };
+
+        // Populate radio buttons for all fields
+        fields.forEach(field => {
+            const container = document.getElementById(field);
+            Object.keys(grades).forEach(grade => {
+                const label = document.createElement('label');
+                label.className = 'radio-option';
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.name = field;
+                input.value = grades[grade];
+                if (grade === 'F') input.checked = true; // Default selection
+                label.appendChild(input);
+                label.appendChild(document.createTextNode(` ${grade}`));
+                container.appendChild(label);
+            });
+        });
+
+        document.getElementById('calculate-btn').addEventListener('click', function() {
+            let totalCredits = 0;
+
+            fields.forEach(field => {
+                const value = document.querySelector(`input[name="${field}"]:checked`).value;
+                totalCredits += parseInt(value) * weights[field];
+            });
+
             const gpa = totalCredits / 22;
 
             document.getElementById('total-credits').textContent = `Total Credits: ${totalCredits.toFixed(2)}`;

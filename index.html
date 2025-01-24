@@ -11,36 +11,36 @@
         <h1>CGPA Calculator</h1>
         <form id="cgpa-form">
             <div class="input-group">
-                <label>Data Structures (DS):</label>
-                <div class="radio-group" id="ds"></div>
+                <label>Data Analysis and Algorythms (DAA):</label>
+                <div class="radio-group" id="daa"></div>
             </div>
             <div class="input-group">
-                <label>Object Oriented Programming (OOPS):</label>
-                <div class="radio-group" id="oops"></div>
+                <label>Database Systems (DBS):</label>
+                <div class="radio-group" id="dbs"></div>
             </div>
             <div class="input-group">
-                <label>Computer Organization & Architecture (COA):</label>
-                <div class="radio-group" id="coa"></div>
+                <label>Formal Language Automata (FLAT):</label>
+                <div class="radio-group" id="flat"></div>
             </div>
             <div class="input-group">
-                <label>Digital System Design (DSD):</label>
-                <div class="radio-group" id="dsd"></div>
+                <label>Embedded Systemns (ES):</label>
+                <div class="radio-group" id="es"></div>
             </div>
             <div class="input-group">
                 <label>Mathematics (MATH):</label>
                 <div class="radio-group" id="math"></div>
             </div>
             <div class="input-group">
-                <label>Data Structures Lab (DS Lab):</label>
-                <div class="radio-group" id="ds-lab"></div>
+                <label>DAA Lab:</label>
+                <div class="radio-group" id="daa-lab"></div>
             </div>
             <div class="input-group">
-                <label>OOPS Lab:</label>
-                <div class="radio-group" id="oops-lab"></div>
+                <label>ES Lab:</label>
+                <div class="radio-group" id="es-lab"></div>
             </div>
             <div class="input-group">
-                <label>DSD Lab:</label>
-                <div class="radio-group" id="dsd-lab"></div>
+                <label>DBS Lab:</label>
+                <div class="radio-group" id="dbs-lab"></div>
             </div>
             <button type="button" id="calculate-btn">Calculate</button>
         </form>
@@ -62,16 +62,16 @@
             'F': 0
         };
 
-        const fields = ['ds', 'oops', 'coa', 'dsd', 'math', 'ds-lab', 'oops-lab', 'dsd-lab'];
+        const fields = ['daa', 'dbs', 'flat', 'es', 'math', 'daa-lab', 'dbs-lab', 'es-lab'];
         const weights = {
-            'ds': 4,
-            'oops': 4,
-            'coa': 4,
-            'dsd': 4,
+            'daa': 4,
+            'flat': 3,
+            'dbs': 4,
+            'es': 4,
             'math': 3,
-            'ds-lab': 1,
-            'oops-lab': 1,
-            'dsd-lab': 1
+            'daa-lab': 1,
+            'es-lab': 1,
+            'dbs-lab': 1
         };
 
         // Populate radio buttons for all fields
@@ -99,7 +99,7 @@
                 totalCredits += parseInt(value) * weights[field];
             });
 
-            const gpa = totalCredits / 22;
+            const gpa = totalCredits / 21;
 
             document.getElementById('total-credits').textContent = `Total Credits: ${totalCredits.toFixed(2)}`;
             document.getElementById('gpa').textContent = `GPA: ${gpa.toFixed(2)}`;

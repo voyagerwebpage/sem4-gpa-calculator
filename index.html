@@ -1,120 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CGPA Calculator - New Semester</title>
-    <link rel="stylesheet" href="https://voyagerwebpage.github.io/sem4-gpa-calculator/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CGPA Calculator - New Semester</title>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
-    <div class="container">
-        <h1>CGPA Calculator - New Semester</h1>
-        <div class="theme-toggle">
-            <button id="theme-btn">Toggle Dark Mode</button>
-        </div>
-
-        <form id="cgpa-form">
-            <div class="input-group">
-                <label>Mathematics:</label>
-                <div class="radio-group" id="math"></div>
-            </div>
-            <div class="input-group">
-                <label>Formal Language and Automata Theory (FLAT):</label>
-                <div class="radio-group" id="flat"></div>
-            </div>
-            <div class="input-group">
-                <label>Embedded Systems (ES):</label>
-                <div class="radio-group" id="es"></div>
-            </div>
-            <div class="input-group">
-                <label>Database Systems (DBMS):</label>
-                <div class="radio-group" id="dbms"></div>
-            </div>
-            <div class="input-group">
-                <label>Design and Analysis of Algorithms (DAA):</label>
-                <div class="radio-group" id="daa"></div>
-            </div>
-            <div class="input-group">
-                <label>Embedded Systems Lab:</label>
-                <div class="radio-group" id="es-lab"></div>
-            </div>
-            <div class="input-group">
-                <label>Database Systems Lab:</label>
-                <div class="radio-group" id="dbms-lab"></div>
-            </div>
-            <div class="input-group">
-                <label>DAA Lab:</label>
-                <div class="radio-group" id="daa-lab"></div>
-            </div>
-            <button type="button" id="calculate-btn">Calculate</button>
-        </form>
-        <div id="result">
-            <h2>Results</h2>
-            <p id="total-credits">Total Credits: </p>
-            <p id="gpa">GPA: </p>
-        </div>
+  <div class="container">
+    <h1>CGPA Calculator - New Semester</h1>
+    <div class="theme-toggle">
+      <button id="theme-btn">Toggle Light Mode</button>
     </div>
 
-    <script>
-        const grades = {
-            'A+': 10,
-            'A': 9,
-            'B': 8,
-            'C': 7,
-            'D': 6,
-            'E': 5,
-            'F': 0
-        };
+    <form id="cgpa-form">
+      <div class="input-group">
+        <label>Mathematics:</label>
+        <div class="radio-group" id="math"></div>
+      </div>
+      <div class="input-group">
+        <label>Formal Language and Automata Theory (FLAT):</label>
+        <div class="radio-group" id="flat"></div>
+      </div>
+      <div class="input-group">
+        <label>Embedded Systems (ES):</label>
+        <div class="radio-group" id="es"></div>
+      </div>
+      <div class="input-group">
+        <label>Database Systems (DBMS):</label>
+        <div class="radio-group" id="dbms"></div>
+      </div>
+      <div class="input-group">
+        <label>Design and Analysis of Algorithms (DAA):</label>
+        <div class="radio-group" id="daa"></div>
+      </div>
+      <div class="input-group">
+        <label>Embedded Systems Lab:</label>
+        <div class="radio-group" id="es-lab"></div>
+      </div>
+      <div class="input-group">
+        <label>Database Systems Lab:</label>
+        <div class="radio-group" id="dbms-lab"></div>
+      </div>
+      <div class="input-group">
+        <label>DAA Lab:</label>
+        <div class="radio-group" id="daa-lab"></div>
+      </div>
+      <button type="button" id="calculate-btn">Calculate</button>
+    </form>
 
-        const fields = ['math', 'flat', 'es', 'dbms', 'daa', 'es-lab', 'dbms-lab', 'daa-lab'];
-        const weights = {
-            'math': 3,
-            'flat': 3,
-            'es': 4,
-            'dbms': 4,
-            'daa': 4,
-            'es-lab': 1,
-            'dbms-lab': 1,
-            'daa-lab': 1
-        };
+    <div id="result">
+      <h2>Results</h2>
+      <p id="total-credits">Total Credits: </p>
+      <p id="gpa">GPA: </p>
+    </div>
+  </div>
 
-        // Populate radio buttons for all fields
-        fields.forEach(field => {
-            const container = document.getElementById(field);
-            Object.keys(grades).forEach(grade => {
-                const label = document.createElement('label');
-                label.className = 'radio-option';
-                const input = document.createElement('input');
-                input.type = 'radio';
-                input.name = field;
-                input.value = grades[grade];
-                if (grade === 'F') input.checked = true; // Default selection
-                label.appendChild(input);
-                label.appendChild(document.createTextNode(` ${grade}`));
-                container.appendChild(label);
-            });
-        });
+  <script>
+    const grades = {
+      'A+': 10,
+      'A': 9,
+      'B': 8,
+      'C': 7,
+      'D': 6,
+      'E': 5,
+      'F': 0
+    };
 
-        document.getElementById('calculate-btn').addEventListener('click', function() {
-            let totalCredits = 0;
+    const gradeClasses = {
+      'A+': 'grade-ap',
+      'A': 'grade-a',
+      'B': 'grade-b',
+      'C': 'grade-c',
+      'D': 'grade-d',
+      'E': 'grade-e',
+      'F': 'grade-f'
+    };
 
-            fields.forEach(field => {
-                const value = document.querySelector(`input[name="${field}"]:checked`).value;
-                totalCredits += parseInt(value) * weights[field];
-            });
+    const fields = ['math', 'flat', 'es', 'dbms', 'daa', 'es-lab', 'dbms-lab', 'daa-lab'];
+    const weights = {
+      'math': 3,
+      'flat': 3,
+      'es': 4,
+      'dbms': 4,
+      'daa': 4,
+      'es-lab': 1,
+      'dbms-lab': 1,
+      'daa-lab': 1
+    };
 
-            const totalWeight = Object.values(weights).reduce((a, b) => a + b, 0);
-            const gpa = totalCredits / totalWeight;
+    fields.forEach(field => {
+      const container = document.getElementById(field);
+      Object.keys(grades).forEach(grade => {
+        const label = document.createElement('label');
+        label.className = `radio-option ${gradeClasses[grade]}`;
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = field;
+        input.value = grades[grade];
+        if (grade === 'F') input.checked = true;
+        label.appendChild(input);
+        label.appendChild(document.createTextNode(` ${grade}`));
+        container.appendChild(label);
+      });
+    });
 
-            document.getElementById('total-credits').textContent = `Total Credits: ${totalCredits.toFixed(2)}`;
-            document.getElementById('gpa').textContent = `GPA: ${gpa.toFixed(2)}`;
-        });
+    document.getElementById('calculate-btn').addEventListener('click', function () {
+      let totalCredits = 0;
 
-        // Dark mode toggle
-        document.getElementById('theme-btn').addEventListener('click', () => {
-            document.body.classList.toggle('dark');
-        });
+      fields.forEach(field => {
+        const value = document.querySelector(`input[name="${field}"]:checked`).value;
+        totalCredits += parseInt(value) * weights[field];
+      });
 
-    </script>
+      const totalWeight = Object.values(weights).reduce((a, b) => a + b, 0);
+      const gpa = totalCredits / totalWeight;
+
+      document.getElementById('total-credits').textContent = `Total Credits: ${totalCredits.toFixed(2)}`;
+      document.getElementById('gpa').textContent = `GPA: ${gpa.toFixed(2)}`;
+    });
+
+    const themeBtn = document.getElementById('theme-btn');
+    const body = document.body;
+
+    // Apply saved theme if exists
+    if (localStorage.getItem('theme') === 'light') {
+        body.classList.remove('dark');
+    } else {
+        body.classList.add('dark'); // Default to dark
+    }
+
+    themeBtn.addEventListener('click', () => {
+        body.classList.toggle('dark');
+
+        // Save preference
+        if (body.classList.contains('dark')) {
+            localStorage.setItem('theme', 'dark');
+        } else {
+            localStorage.setItem('theme', 'light');
+        }
+    });
+  </script>
 </body>
 </html>

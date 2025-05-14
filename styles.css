@@ -5,8 +5,9 @@
     --label-color: #555;
     --radio-bg: #e7e9eb;
     --radio-hover: #d4d7da;
-    --button-bg: #007bff;
-    --button-hover: #0056b3;
+    --button-bg: #438bff;
+    --button-hover: #90b8ff;
+
 }
 
 body.dark {
@@ -16,8 +17,10 @@ body.dark {
     --label-color: #ccc;
     --radio-bg: #3c3c50;
     --radio-hover: #505066;
-    --button-bg: #4a90e2;
-    --button-hover: #357ab8;
+    --button-bg: #4f8cc9;
+    --button-hover: #3b7bbf;
+
+
 }
 
 body {
@@ -110,22 +113,43 @@ button:hover {
 }
 
 .theme-toggle {
-    text-align: center;
-    margin-top: 10px;
+    text-align: right;
+    margin-bottom: 20px;
 }
 
 .theme-toggle button {
+    padding: 6px 10px;
+    font-size: 0.85rem;
     background: none;
-    color: var(--text-color);
     border: 1px solid var(--text-color);
-    padding: 6px 12px;
-    border-radius: 20px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 0.9rem;
+    color: var(--text-color);
     transition: all 0.3s ease;
+    display: inline-block;
+    width: auto;
 }
 
 .theme-toggle button:hover {
-    background: var(--text-color);
+    background-color: var(--text-color);
     color: var(--bg-color);
 }
+
+
+/* Grade color styles – Vibrant */
+.grade-ap { background-color: #6ee7b7; color: #000; }
+.grade-a  { background-color: #a7f3d0; color: #000; }
+.grade-b  { background-color: #fde68a; color: #000; }
+.grade-c  { background-color: #fdba74; color: #000; }
+.grade-d  { background-color: #fb923c; color: #fff; }
+.grade-e  { background-color: #f87171; color: #fff; }
+.grade-f  { background-color: #ef4444; color: #fff; }
+
+/* Dark theme overrides – Vibrant */
+body.dark .grade-ap { background-color: #047857; color: #fff; }
+body.dark .grade-a  { background-color: #059669; color: #fff; }
+body.dark .grade-b  { background-color: #facc15; color: #000; }
+body.dark .grade-c  { background-color: #f97316; color: #000; }
+body.dark .grade-d  { background-color: #ea580c; color: #fff; }
+body.dark .grade-e  { background-color: #dc2626; color: #fff; }
+body.dark .grade-f  { background-color: #b91c1c; color: #fff; }

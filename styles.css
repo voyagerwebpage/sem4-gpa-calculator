@@ -1,23 +1,47 @@
+:root {
+    --bg-color: #f4f4f9;
+    --text-color: #333;
+    --container-bg: #ffffff;
+    --label-color: #555;
+    --radio-bg: #e7e9eb;
+    --radio-hover: #d4d7da;
+    --button-bg: #007bff;
+    --button-hover: #0056b3;
+}
+
+body.dark {
+    --bg-color: #1e1e2f;
+    --text-color: #eee;
+    --container-bg: #2a2a3d;
+    --label-color: #ccc;
+    --radio-bg: #3c3c50;
+    --radio-hover: #505066;
+    --button-bg: #4a90e2;
+    --button-hover: #357ab8;
+}
+
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     margin: 0;
     padding: 0;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
     max-width: 600px;
     margin: 50px auto;
     padding: 20px;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: var(--container-bg);
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    transition: background 0.3s;
 }
 
 h1 {
     text-align: center;
-    color: #444;
+    color: var(--text-color);
 }
 
 .input-group {
@@ -26,7 +50,7 @@ h1 {
 
 label {
     font-weight: bold;
-    color: #555;
+    color: var(--label-color);
 }
 
 .radio-group {
@@ -37,12 +61,13 @@ label {
 }
 
 .radio-option {
-    background: #e7e9eb;
+    background: var(--radio-bg);
     padding: 8px 12px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 6px;
     font-size: 0.9rem;
     cursor: pointer;
+    transition: background 0.3s;
 }
 
 .radio-option input {
@@ -50,24 +75,24 @@ label {
 }
 
 .radio-option:hover {
-    background: #d4d7da;
+    background: var(--radio-hover);
 }
 
 button {
     display: block;
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     font-size: 1rem;
     color: #fff;
-    background: #007bff;
+    background: var(--button-bg);
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
     transition: background 0.3s ease;
 }
 
 button:hover {
-    background: #0056b3;
+    background: var(--button-hover);
 }
 
 #result {
@@ -76,10 +101,31 @@ button:hover {
 }
 
 #result h2 {
-    color: #444;
+    color: var(--text-color);
 }
 
 #result p {
     font-size: 1.1rem;
     margin: 5px 0;
+}
+
+.theme-toggle {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.theme-toggle button {
+    background: none;
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle button:hover {
+    background: var(--text-color);
+    color: var(--bg-color);
 }
